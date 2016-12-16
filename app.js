@@ -12,8 +12,8 @@ function scrapePage(url) {
             var hyperLinks = $('a');
             var q = require('async').queue(function (task, callback) {
                 console.log(task.url);
-                if($(hyperLinks[i]).attr('href')){
-                    scrapePage($(hyperLinks[i]).attr('href'));
+                if(task.url){
+                    scrapePage(task.url);
                 }
                 callback();
             }, 5);
