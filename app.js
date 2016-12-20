@@ -14,7 +14,8 @@ var queue = async.queue(function scrapePage(url, next) {
         resultUrls.push(url);
         var $ = cheerio.load(body);
         var hyperLinks = $('a');
-        for(var i=0; i<hyperLinks.length;i++){
+        for(var i=0; i<5;i++){
+            console.log($(hyperLinks[i]).attr('href'));
             queue.push($(hyperLinks[i]).attr('href'));
         }
         next(null);
