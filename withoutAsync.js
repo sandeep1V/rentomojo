@@ -7,7 +7,7 @@ function scrapePage(arg, callback) {
             var hyperLinks = $('a');
             for(var i=0; i<hyperLinks.length;i++){
                 console.log(items);
-                if($(hyperLinks[i]).attr('href') && items.indexOf($(hyperLinks[i]).attr('href')) !== -1){
+                if($(hyperLinks[i]).attr('href')){
                     items.push($(hyperLinks[i]).attr('href'));
                 }
             }

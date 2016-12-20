@@ -1,11 +1,9 @@
 # rentomojo
-run node app.js
-Then hit http://localhost:8081/scrape
+--->> run node app.js and then hit http://localhost:8081/scrape (using async libraty)
+--->> run withoutAsync.js (without using async)
 
 Things done
 1) Scraping medium.com recursively.
 2) Maintaing concurrency to 5 using async library.
 3) Export to csv(output.csv) once crawling has been done.
-
-To be done:
-1) Did with async, to be done without async.
+4) Without using async library
