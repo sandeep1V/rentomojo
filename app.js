@@ -5,6 +5,7 @@ var cheerio = require('cheerio');
 var app     = express();
 var async = require('async');
 var resultUrls = [];
+var concurrency = 5;
 
 
 var queue = async.queue(function scrapePage(url, next) {
@@ -14,12 +15,13 @@ var queue = async.queue(function scrapePage(url, next) {
         resultUrls.push(url);
         var $ = cheerio.load(body);
         var hyperLinks = $('a');
-        for(var i=0; i<hyperLinks.length;i++){
+        for(var i=0; i < hyperLinks.length;i++){
+            //try hyperLinks.length = 3 or 4 so that the csv would be generated soon.
             queue.push($(hyperLinks[i]).attr('href'));
         }
         next(null);
     });
-}, 5);
+}, concurrency);
 
 app.get('/scrape', function(req, res){
     queue.push('https://medium.com');
