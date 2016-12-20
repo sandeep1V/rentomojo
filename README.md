@@ -1,6 +1,5 @@
 # rentomojo
 run node app.js
-Then hit http://localhost:8081/scrape
 
 Things done
 1) Scraping medium.com recursively.
