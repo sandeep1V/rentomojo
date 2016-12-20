@@ -9,3 +9,4 @@ Things done
 
 Note:
 1) Scraping without using async library is in withoutAsync branch. Please check readme file of particular branch.
+2) Try changing hyperlinks.length to smaller value to get output in csv. 
