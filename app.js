@@ -12,6 +12,7 @@ var queue = async.queue(function scrapePage(url, next) {
     if (!url || resultUrls.indexOf(url) !== -1) return next(null);
     request(url, function(err, response, body){
         if (err) return next(err);
+        console.log(url);
         resultUrls.push(url);
         var $ = cheerio.load(body);
         var hyperLinks = $('a');
@@ -23,19 +24,15 @@ var queue = async.queue(function scrapePage(url, next) {
     });
 }, concurrency);
 
-app.get('/scrape', function(req, res){
-    queue.push('https://medium.com');
-    queue.drain = function () {
-        //called at the end
-        var output = resultUrls[0];
-        for(var i=1; i<resultUrls.length;i++){
-            output += "\n"+resultUrls[i]
-        }
-        fs.writeFile('output.csv',output, function (err, resp) {
-            console.log('done');
-        })
+queue.push('https://medium.com');
+queue.drain = function () {
+    //called at the end
+    var output = resultUrls[0];
+    for(var i=1; i<resultUrls.length;i++){
+        output += "\n"+resultUrls[i]
     }
-});
-
-app.listen('8081');
+    fs.writeFile('output.csv',output, function (err, resp) {
+        console.log('done');
+    })
+};
 exports = module.exports = app;
